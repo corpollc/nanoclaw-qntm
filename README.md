@@ -16,6 +16,17 @@
 
 ---
 
+## qntm Variant
+
+This fork adds qntm as a NanoClaw messaging channel.
+
+- Channel JIDs use the form `qntm:<conv-id>`
+- Configure `QNTM_IDENTITY_DIR` with a qntm profile directory containing `identity.json` and `conversations.json`
+- `QNTM_RELAY_URL` is optional and defaults to `https://inbox.qntm.corpo.llc`
+- Register qntm conversations with `npx tsx setup/index.ts --step register -- --jid "qntm:<conv-id>" --name "<name>" --folder "qntm_<name>" --trigger "@${ASSISTANT_NAME}" --channel qntm`
+
+The qntm channel subscribes to registered conversations, delivers inbound text into NanoClaw, and sends agent replies back to the same qntm conversation.
+
 ## Why I Built NanoClaw
 
 [OpenClaw](https://github.com/openclaw/openclaw) is an impressive project, but I wouldn't have been able to sleep if I had given complex software I didn't understand full access to my life. OpenClaw has nearly half a million lines of code, 53 config files, and 70+ dependencies. Its security is at the application level (allowlists, pairing codes) rather than true OS-level isolation. Everything runs in one Node process with shared memory.
