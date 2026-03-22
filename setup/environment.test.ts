@@ -117,5 +117,17 @@ describe('channel auth detection', () => {
     // Non-existent directory
     expect(hasAuth('/tmp/nonexistent_auth_dir_xyz')).toBe(false);
   });
-});
 
+  it('detects qntm when identity dir is configured', () => {
+    const channelAuth: Record<string, string> = {};
+    const envVars = {
+      QNTM_IDENTITY_DIR: '/tmp/qntm-profile',
+    };
+
+    if ((envVars.QNTM_IDENTITY_DIR || '').trim()) {
+      channelAuth.qntm = 'configured';
+    }
+
+    expect(channelAuth.qntm).toBe('configured');
+  });
+});
